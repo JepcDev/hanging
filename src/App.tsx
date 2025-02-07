@@ -1,4 +1,6 @@
 import { letters } from './helpers/letters';
+import { HangImage } from './components/HangImage';
+
 import './App.css';
 
 function App() {
@@ -8,7 +10,8 @@ function App() {
       {/* <h1>Hola Mundo!!</h1> */}
 
       {/* //DEV:COMMENT -> Imágenes */}
-      <h3>Imagen del juego</h3>
+      {/* <h3>Imagen del juego</h3> */}
+      <HangImage imageNumber={9}/>
 
       {/* *DEV:COMMENT -> Palabra oculta */}
       <h3>_ _ _ _ _ _ _ _ _ _ _ _ _ _</h3>
