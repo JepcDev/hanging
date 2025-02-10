@@ -9,7 +9,7 @@ import image7 from "../assets/7.png";
 import image8 from "../assets/8.png";
 import image9 from "../assets/9.png";
 
-let images: string[] = [
+const images: string[] = [
   image0,
   image1,
   image2,
@@ -26,9 +26,14 @@ interface Props {
   imageNumber: number;
 }
 
+// Las propertis se reciben en los argumentos de la funcion que se conocen como props y su tipo de dato props:Props
 // export function HangImage(props: Props) {
+// usamos una tecnica llamada desestructuracion {imageNumber}: Props para extraer que atributo o property se quiere extraer de los argumentos o properties que nos estan enviando
 export function HangImage({imageNumber}: Props) {
   // console.log(props.imageNumber);//extrae el numero o posicion de la imagen
+
+  // Una validacion para que cuando el intento sea mayor a 9 , 10,11 ect no nos salte un error
+  // con esto nos aseguramos que componente siempre muestre una imagen correcta
   if (imageNumber>=9) {
     imageNumber = 9;
   }
