@@ -6,9 +6,9 @@ import './App.css';
 
 function App() {
 
-  const [word] = useState('COMPUTADORA'); //Palabra secreta, la palabra secreta es el valor inicial de useState(), estado inicial
+  const [word] = useState('COMPUTADORA'); //Palabra secreta-oculta, la palabra secreta es el valor inicial de useState(), estado inicial
   // Poner un guion bajo por cada letra de la palabra secreta
-  const [hiddenWord] = useState('_ '.repeat(word.length));//repite (_ ) las veces de la longitud de la palabra, estado inicial de hidden word
+  const [hiddenWord, setHiddenWord] = useState('_ '.repeat(word.length));//repite (_ ) las veces de la longitud de la palabra, estado inicial de hidden word
 
   // Manejo de estado, necesitamos un estado para que la imagen vya cambiando cada vez que haya un intento fallido(en este caso cada intento consideramos que es un intento fallido)
   // Para el cambio de las imagenes le decimos a react que maneje el estado de la app, el estado es como se encuentra el valor de alguna variable y esa variable queremos que haga algun cambio en el html(o en el estado de la aplicaicon, pantalla ect)
@@ -23,13 +23,27 @@ function App() {
   //con todo esta sintaxis Le decimos a react que cuando alguien revisa la letra llamado a la funcion setAttempts y la funcion se encarga de incrementar a attempts en 1;
   // y cuando attempts cambie react va saber que tiene que actualizar, renderizar el html con los nuevos valores y el los lugares respectivos
   const checkLetter = (letter: string)=>{
-    console.log(letter);
+    // console.log(letter);
     // setAttempts(attempts+1);
     //Math.min(attempts+1,9) el valor que va tener los intentos va ser el valor minimo entre attempts+1 y 9
-    if (!word.includes(letter)) { //pregunta si no existe la letra en el array de letras(caracteres) de la palabra secreta los intentos fallidos incrementan;
+    if (!word.includes(letter)) { //pregunta si no existe===true, la letra en el array de letras(caracteres) de la palabra secreta los intentos fallidos incrementan;
       setAttempts(Math.min(attempts+1,9));
       return;
     }
+    // si ejecuto desde aqui el codigo quiere decir que la letra existe
+    const hiddenWordArray = hiddenWord.split(' ');
+    console.log(hiddenWordArray);
+
+    for (let index = 0; index < word.length; index++) {
+      console.log(word[index]);//imprime cada letra de word;
+      if (word[index]===letter) {
+        // aqui hacemos el reemplazo de la posicion respectiva en el (hidden word). con la posicion de (word) que tenemos aqui
+        // El word y el hiddemWord tienen el mismo tamaño, largo = a la letra letter que estoy reciviendo
+        hiddenWordArray[index]=letter;
+      }
+    }
+    // console.log(hiddenWordArray.join(' '));
+    setHiddenWord(hiddenWordArray.join(' '));
 
   }
 
