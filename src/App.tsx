@@ -9,7 +9,7 @@ function App() {
 
   // Los string son considerados un arreglo de caracteres
   // const [word] = useState('COMPUTADORA'); //Palabra secreta-oculta, la palabra secreta es el valor inicial de useState(), estado inicial
-  const [word] = useState(getRandomWord);//Obtenemos una palabra secreta random
+  const [word, setWord] = useState(getRandomWord);//Obtenemos una palabra secreta random
   // Poner un guion bajo por cada letra de la palabra secreta
   const [hiddenWord, setHiddenWord] = useState('_ '.repeat(word.length));//repite (_ ) las veces de la longitud de la palabra, estado inicial de hidden word
 
@@ -74,7 +74,17 @@ function App() {
     }
     // console.log(hiddenWordArray.join(' '));
     setHiddenWord(hiddenWordArray.join(' '));//procedimiento opuesto del split -> join , las letras se unen por un espacion, setHiddenWord cambia el valor de hiddemWord por el valor de hiddenWordArray y la union de las letra por un espacio.
+  }
 
+  const newGame = ()=>{
+    // console.log('new Game');
+    const newWord = getRandomWord();
+
+    setWord(newWord);
+    setHiddenWord('_ '.repeat(newWord.length));
+    setAttempts(0);
+    setLose(false);
+    setWon(false);
   }
 
   return (
@@ -119,6 +129,10 @@ function App() {
           </button>
         ))
       }
+      <br />
+      {/*  */}
+      <button onClick={()=>newGame()} >¿Nuevo juego?</button>{/*  //reinicia el juego*/}
+      {/* <button onClick={newGame} >¿Nuevo juego?</button> //si no tiene o no necesita argumentosla funcion se puede enviar la funcion como referencia */}
 
     </div>
   );
