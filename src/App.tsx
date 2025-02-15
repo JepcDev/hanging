@@ -1,13 +1,15 @@
 import { useEffect, useState } from 'react';
 import { letters } from './helpers/letters';
 import { HangImage } from './components/HangImage';
+import { getRandomWord } from './helpers/getRandomWord';
 
 import './App.css';
 
 function App() {
 
   // Los string son considerados un arreglo de caracteres
-  const [word] = useState('COMPUTADORA'); //Palabra secreta-oculta, la palabra secreta es el valor inicial de useState(), estado inicial
+  // const [word] = useState('COMPUTADORA'); //Palabra secreta-oculta, la palabra secreta es el valor inicial de useState(), estado inicial
+  const [word] = useState(getRandomWord);//Obtenemos una palabra secreta random
   // Poner un guion bajo por cada letra de la palabra secreta
   const [hiddenWord, setHiddenWord] = useState('_ '.repeat(word.length));//repite (_ ) las veces de la longitud de la palabra, estado inicial de hidden word
 
@@ -25,7 +27,7 @@ function App() {
   // Determinar si la persona perdio
   useEffect(()=>{
     // esta accion es deteminar si gano o perdio
-    console.log(attempts);
+    // console.log(attempts);
     if (attempts>=9) {//determina si la persona perdio, si los intentos son 9 o mas , cambiamos el estado de setLose
       setLose(true);
     }
@@ -49,7 +51,8 @@ function App() {
   //con todo esta sintaxis Le decimos a react que cuando alguien revisa la letra llamado a la funcion setAttempts y la funcion se encarga de incrementar a attempts en 1;
   // y cuando attempts cambie react va saber que tiene que actualizar, renderizar el html con los nuevos valores y el los lugares respectivos
   const checkLetter = (letter: string)=>{
-    if (lose) return;//si lose=true ya no se ejecuta lo demas del codigo
+    if (lose) return;//si lose=true(perdimos) ya no se ejecuta lo demas del codigo
+    if (won) return;//si won=true(ganamos) ya no se ejecuta lo demas del codigo
     // console.log(letter);
     // setAttempts(attempts+1);
     //Math.min(attempts+1,9) el valor que va tener los intentos va ser el valor minimo entre attempts+1 y 9
@@ -59,10 +62,10 @@ function App() {
     }
     // si ejecuto desde aqui el codigo quiere decir que la letra existe
     const hiddenWordArray = hiddenWord.split(' ');//tomamos hiddemWord y cortamos separamos las letras por un espacio y se crea un nuevo arreglo.
-    console.log(hiddenWordArray);
+    // console.log(hiddenWordArray);
 
     for (let index = 0; index < word.length; index++) { //recorremos cada una de las letras de la palabra -> "word" que es un array
-      console.log(word[index]);//imprime cada letra de word;
+      // console.log(word[index]);//imprime cada letra de word;
       if (word[index]===letter) {//comparamos si las letras de la palabra oculta o secreta es igual a la letra que presionamos en la pantalla del juego.
         // aqui hacemos el reemplazo de la posicion respectiva en el (hidden word). con la posicion de la letra que si existe en la palabra(word) que tenemos aqui.
         // El word y el hiddemWord tienen el mismo tamaño, largo = a la letra letter que estoy reciviendo
