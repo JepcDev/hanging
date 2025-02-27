@@ -20,7 +20,7 @@ function App() {
   const [attempts, setAttempts] = useState(0); //aqui estamos desestructurando un arreglo de useState() ya eso es lo que nos regresa con algunas cosas mas poreso le espeficicamos que queremos solamente el arreglo
   // attempts siempre tiene el ultimo valor guardado
 
-  const [lose, setLose] = useState(false); //Manejo de estado de la persona si o perdio
+  const [lose, setLose] = useState(false); //Manejo de estado de la persona si perdio
   // React tiene efecto(hooks) el cual nos permite disparar acciones cuando algo sucede esta pendiende de algo y cuando ese algo cambiia  o se cumpla se puede reaccionar a eso.
   const [won, setWon] = useState(false);//Maneja el estado de la persona si gano.
 
@@ -38,12 +38,12 @@ function App() {
   useEffect(()=>{
     //console.log(hiddenWord);//_ _ _ _ _ _ split quita los espacios entre los guiones
     // si el hiddemWord es = a (word) significa que la persona gano
-    const currentHiddenWord = hiddenWord.split(' ').join(' ');//El split quita los espacion y crea un nuevo arreglo el cual es unido mediante la funcion join con un string vacio
+    const currentHiddenWord = hiddenWord.split(' ').join(' ');//El split quita los espacios y crea un nuevo arreglo el cual es unido mediante la funcion join con un string vacio
     if (currentHiddenWord === word) {//verifica si la palabra de hiddemWord es igual a la word la palabra secreta.y  si es asi eso significa que la persona gano
       setWon(true);
     }
 
-  },[hiddenWord]);//tenemos que que estar pendiente de hiddemWord para saber si la persona hace algo y ejecutar la condicion para saber si la perosona gano
+  },[hiddenWord]);//tenemos que que estar pendiente de hiddenWord para saber si la persona hace algo y ejecutar la condicion para saber si la perosona gano
 
   // creamos la funcion la cual incrementara el attempts cada vez que haya un intento fallido, es decir cuando haga click en un boton con una letra equivocada
   // function checkLetter(letter:string) {
@@ -57,7 +57,7 @@ function App() {
     // setAttempts(attempts+1);
     //Math.min(attempts+1,9) el valor que va tener los intentos va ser el valor minimo entre attempts+1 y 9
     if (!word.includes(letter)) { //pregunta si no existe===true, la letra en el array de letras(caracteres) de la palabra secreta los intentos fallidos incrementan;
-      setAttempts(Math.min(attempts+1,9));
+      setAttempts(Math.min(attempts+1,9));// es para controlar que los intentos superen los 9 intentos(va llegar el momento en que attempts sera mayor a 9 y en ese caso attemps sera menor a attemps+1 y ese es el valor que setAttempts tendra)
       return;
     }
     // si ejecuto desde aqui el codigo quiere decir que la letra existe

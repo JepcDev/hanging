@@ -1,6 +1,8 @@
 # Hanging game
 ## React + TypeScript + Vite
 
+- sitio alojado en netlify [link](https://hanging-game-jepc.netlify.app/)
+
 This template provides a minimal setup to get React working in Vite with HMR and some ESLint rules.
 
 Currently, two official plugins are available:
